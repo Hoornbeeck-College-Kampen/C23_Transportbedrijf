@@ -1,26 +1,31 @@
 <?php
 //invoegen include database
-require_once "database.php";
+require_once "inc/database.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Klantgegevens</title>
 </head>
 <body>
     <div class="container">
         <?php
             //menu
+            include 'inc/menu.php';
 
             //header tags
 
             //gridopmaak
+            echo '<main class="main-content">';
 
         ?>
         <!--tabel-->
-        <table>
+        <table id="customers">
             <tr>
                 <th>Naam</th>
                 <th>Contactpersoon</th>
@@ -31,6 +36,7 @@ require_once "database.php";
                 <th>Plaats</th>
                 <th>Telefoonnummer</th>
                 <th>Email</th>
+                <th>Acties</th>
             </tr>
         <?php
         //ophalen van de klantgegevens
@@ -52,6 +58,12 @@ require_once "database.php";
                 $contentTable .= "<td>" . $row['plaats'] . "</td>";
                 $contentTable .= "<td>" . $row['telefoon'] . "</td>";
                 $contentTable .= "<td>" . $row['notitie'] . "</td>";
+                $contentTable .= "<td>
+                                        <a href='klant_edit.php?id={$row['id']}' class='btn-edit'>
+                                        <i class='material-icons md-24'>edit</i></a>
+                                        <a href='klant_delete.php?id={$row['id']}' class='btn-delete'>
+                                        <i class='material-icons md-24'>delete</i></a>
+                                  </td>";
                 $contentTable .= "</tr>";
             }
         } else {
@@ -60,6 +72,8 @@ require_once "database.php";
     
         $contentTable .= "</table>";
         echo $contentTable;
+
+        echo '</main>';
         ?>
         <!--footer -->
     </div>
