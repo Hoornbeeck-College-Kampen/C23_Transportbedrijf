@@ -2,6 +2,7 @@
 include 'inc/header.php';
 
 //header tags
+<<<<<<< HEAD
 echo '<header class="head">';
 
 //url voor nieuwe klant
@@ -26,6 +27,31 @@ if (!mysqli_num_rows($result)==1) {
 
 //resultaat positief dan klantgegevens tonen
 $klant = mysqli_fetch_array($result);
+=======
+
+//gridopmaak
+echo '<main class="main-content">';
+
+//controleer get/id
+echo '<div id="frmDetail">';
+if (isset($_GET['id'])){
+    $klantId = $_GET['id'];
+} else{
+    header('refresh: 2; url=klanten.php');
+    exit();
+}
+
+//form edit klant
+$queryKlant = "SELECT * FROM klant WHERE id = $klantId";
+$resultKlant = mysqli_query($dbconn, $queryKlant) or die("Error: " . mysqli_error($dbconn));
+if (!mysqli_num_rows($resultKlant) == 1){
+    echo "Geen klantgegevens gevonden";
+    header('refresh: 2; url=klanten.php');
+    exit();
+}
+
+$klant = mysqli_fetch_assoc($resultKlant);
+>>>>>>> 998c1e63b703550aa20fc3f73f5b85ab70008adc
 ?>
 <div>
     <form action="dataverwerken.php" method="post" class="frmDetail">
@@ -49,6 +75,7 @@ $klant = mysqli_fetch_array($result);
         <label for="ftelefoon">Telefoonnummer:</label>
         <input type="text" id="ftelefoon" name="ftelefoon" value="<?php echo $klant['telefoon']; ?>">
         <label for="femail">Email:</label>
+<<<<<<< HEAD
         <input type="text" id="fnotitie" name="fnotitie" value="<?php echo $klant['notitie']; ?>">
         <div class="submitbtn">
             <input type="submit" name="submit" value="Opslaan" class="btnDetailSubmit">
@@ -62,3 +89,18 @@ echo '</main>';
 //include footer
 include 'inc/footer.php';
 ?>
+=======
+        <input type="text" id="femail" name="femail" value="<?php echo $klant['notitie']; ?>">
+        <div class="submitbtn">
+            <input type="submit" value="Opslaan" class="btnDetailSubmit">
+        </div>
+    </form>
+</div>
+
+<?php
+echo '</div>'; //frmDetail
+echo '</main>';
+//footer
+include 'inc/footer.php';
+?>
+>>>>>>> 998c1e63b703550aa20fc3f73f5b85ab70008adc
