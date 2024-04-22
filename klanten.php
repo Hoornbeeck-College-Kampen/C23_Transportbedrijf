@@ -1,26 +1,16 @@
 <?php
-//invoegen include database
-require_once "database.php";
+    //invoegen header.php
+    require_once "inc/header.php";
+    //header tags
+    echo '<header class="head">';
+        echo "<a href='klant_new.php' class='btn-new'><i class='material-icons md-24'>add</i></a>";
+    echo '</header>';
+    
+    //gridopmaak
+    echo '<main class="main-content">';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klantgegevens</title>
-</head>
-<body>
-    <div class="container">
-        <?php
-            //menu
-
-            //header tags
-
-            //gridopmaak
-
-        ?>
         <!--tabel-->
-        <table>
+        <table id="customers">
             <tr>
                 <th>Naam</th>
                 <th>Contactpersoon</th>
@@ -31,6 +21,7 @@ require_once "database.php";
                 <th>Plaats</th>
                 <th>Telefoonnummer</th>
                 <th>Email</th>
+                <th>Acties</th>
             </tr>
         <?php
         //ophalen van de klantgegevens
@@ -52,17 +43,22 @@ require_once "database.php";
                 $contentTable .= "<td>" . $row['plaats'] . "</td>";
                 $contentTable .= "<td>" . $row['telefoon'] . "</td>";
                 $contentTable .= "<td>" . $row['notitie'] . "</td>";
+                $contentTable .= "<td>
+                                    <a href = 'klant_edit.php?id={$row['id']}' class = 'btn-edit'><i class = 'material-icons md-24'>edit</i></a>
+                                    <a href = 'klant_delete.php?id={$row['id']}' class = 'btn-delete'><i class = 'material-icons md-24'>delete</i></a>
+                                </td>";
                 $contentTable .= "</tr>";
             }
         } else {
             $contentTable .= "<tr><td colspan='9'>Geen klantgegevens gevonden</td></tr>";
         }
-    
+
+        //weergeven tabel
         $contentTable .= "</table>";
         echo $contentTable;
+
+
+        echo '</main>';
+        //footer
+        include 'inc/footer.php';
         ?>
-        <!--footer -->
-    </div>
-    
-</body>
-</html>
